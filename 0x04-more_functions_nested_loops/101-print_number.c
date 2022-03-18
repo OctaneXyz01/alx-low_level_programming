@@ -8,42 +8,31 @@
 
 void print_number(int n)
 {
-	int negative = 0;
-	int digit;
-	int divisor;
-	int begin = 0;
-	int place = 10;
+	unsigned int num, num2;
+	int i;
+	int aux = 1;
 
 	if (n < 0)
 	{
-		negative = 1;
 		n = n * -1;
+		_putchar('-');
 	}
-	while (place >= 0)
+	num = n;
+	num2 = num;
+	if (num > 9)
 	{
-		/*divisor = pow(10, place);*/
-		divisor = power(10, place);
-		digit = ((n / divisor) % 10);
-		if (digit == 0 && begin == 0)
+		while (num >= 10)
 		{
-			place--;
+			aux = aux * 10;
+			num = num / 10;
 		}
-		else if (digit != 0 && begin == 0)
-		{
-			begin = 1;
-			if (negative == 1)
-				_putchar('-');
-			_putchar('0' + digit);
-			place--;
-		}
+		_putchar((num2 / aux) + '0');
+		aux = aux / 10;
+
+		for (i = aux; i >= 1; i = i / 10)
+		_putchar((num2 / i) % 10 + '0');
+	}
 		else
-		{
-			_putchar('0' + digit);
-			place--;
-		}
-	}
-	if (digit == 0 && divisor == 1)
-	{
-		_putchar(48);
-	}
+		_putchar(num + '0');
 }
+
